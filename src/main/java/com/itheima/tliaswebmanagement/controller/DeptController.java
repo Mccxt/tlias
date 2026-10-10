@@ -4,12 +4,10 @@ import com.itheima.tliaswebmanagement.pojo.Dept;
 import com.itheima.tliaswebmanagement.pojo.Result;
 import com.itheima.tliaswebmanagement.service.DeptService;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 //部门管理控制器
 @Slf4j
@@ -31,10 +29,11 @@ public class DeptController {
 
     // 删除部门
     @DeleteMapping("/depts/{id}")
-    public Result delete(@PathVariable Integer id){
+    public Result delete(@PathVariable Integer id) throws Exception{
         log.info("根据id 删除部门：{}",id);
         // 调用Service删除部门
         deptService.delete(id);
+
         return Result.success();
     }
 

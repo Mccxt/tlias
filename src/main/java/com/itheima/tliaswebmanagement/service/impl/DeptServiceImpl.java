@@ -1,6 +1,7 @@
 package com.itheima.tliaswebmanagement.service.impl;
 
 import com.itheima.tliaswebmanagement.mapper.DeptMapper;
+import com.itheima.tliaswebmanagement.mapper.EmpMapper;
 import com.itheima.tliaswebmanagement.pojo.Dept;
 import com.itheima.tliaswebmanagement.service.DeptService;
 import lombok.AllArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -18,15 +20,18 @@ import java.util.List;
 public class DeptServiceImpl implements DeptService {
     @Autowired
     private DeptMapper deptMapper;
-
+    @Autowired
+    private EmpMapper empMapper;
     @Override
     public List<Dept> list() {
         return deptMapper.list();
     }
 
+    @Transactional
     @Override
     public void delete(Integer id) {
-        deptMapper.deleteById(id);
+        deptMapper.deleteById(id); // 根据id删除部门
+        empMapper.deleteByDeptId(id); // 部门下的员工一并删除
     }
 
     @Override

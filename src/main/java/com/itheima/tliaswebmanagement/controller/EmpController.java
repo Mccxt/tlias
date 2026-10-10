@@ -8,9 +8,11 @@ import com.itheima.tliaswebmanagement.service.EmpService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 // 员工管理控制器
@@ -29,11 +31,11 @@ public class EmpController {
         return Result.success(empList);
     } */
     @GetMapping("/emps")
-    public Result page(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer pageSize){
+    public Result page(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer pageSize, String name, Short gender, @DateTimeFormat(pattern = "yyyy-MM-dd")  LocalDate begin, @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate end){
         // 记录日志
         log.info("分页查询，参数：{},{}",page,pageSize);
         // 调用业务层分页查询功能
-        PageBean pageBean = empService.page(page,pageSize);
+        PageBean pageBean = empService.page(page,pageSize,name,gender,begin,end);
         return Result.success(pageBean);
     }
 

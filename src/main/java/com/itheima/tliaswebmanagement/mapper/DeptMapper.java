@@ -12,7 +12,7 @@ public interface DeptMapper {
     List<Dept> list();
 
     // 删除部门
-    @Delete("delete from dept where id = #{id}")
+    @Delete("delete * from dept where id = #{id}")
     void deleteById(Integer id);
 
     // 增加部门

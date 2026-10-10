@@ -10,8 +10,9 @@ import java.util.List;
 public interface EmpMapper {
 
     // 查询全部员工
-    @Select("select * from emp")
-    List<Emp> list();
+    //  @Select("select * from emp")
+    // 动态SQL推荐谁用xml映射文件定义
+    List<Emp> list(String name, Short gender, LocalDate begin,   LocalDate end);
 
 
 
@@ -28,7 +29,15 @@ public interface EmpMapper {
     Emp getById(Integer id);
 
     // 修改员工
-    @Update("update emp set username=#{username},name=#{name},gender=#{gender},image=#{image},job=#{job},entrydate=#{entrydate},dept_id=#{deptId},update_time=#{updateTime}where id=#{id}")
+    @Update("update emp set username=#{username},name=#{name},gender=#{gender},image=#{image},job=#{job},entrydate=#{entrydate},dept_id=#{deptId},update_time=#{updateTime} " +
+            "where id=#{id}")
     void update(Emp emp);
 
+    // 登录校验：
+    @Select("select * from emp where username=#{username} and password = #{password}")
+    Emp getByUsernameAndPassword(Emp emp);
+
+    // 根据部门id删除部门下的员工信息
+    @Delete("delete * from emp where dept_id = #{DeptId}")
+    void deleteByDeptId(Integer DeptId);
 }
