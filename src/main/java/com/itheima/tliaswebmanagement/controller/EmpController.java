@@ -41,7 +41,7 @@ public class EmpController {
 
     // 删除员工
     @DeleteMapping("/emps/{ids}")
-    public Result delete(@PathVariable("ids") Integer id){    // 里面的参数名应和 DeleteMapping里面的一样
+    public Result delete(@PathVariable("ids") List<Integer> id){    // 里面的参数名应和 DeleteMapping里面的一样
         log.info("根据id 删除部门：{}",id);
         // 调用Service 删除
         empService.delete(id);

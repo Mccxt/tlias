@@ -15,7 +15,7 @@ public interface EmpService {
     // List<Emp> list();
     PageBean page(Integer page, Integer pageSize, String name, Short gender,  LocalDate begin,  LocalDate end);
 
-    void delete(Integer id);
+    void delete(List<Integer> id);
 
     void add(Emp emp) ;
 

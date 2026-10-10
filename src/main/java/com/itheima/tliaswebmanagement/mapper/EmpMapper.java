@@ -17,8 +17,8 @@ public interface EmpMapper {
 
 
     // 删除员工（根据id）
-    @Delete("delete from emp where id = #{id}")
-    void delete(Integer id);
+    // @Delete("delete from emp where id = #{id}")
+    void delete(List<Integer> id);
 
     // 添加员工
     @Insert("insert into emp(username,password,name,gender,image,job,entrydate,dept_id,create_time,update_time) values (#{username},#{password},#{name},#{gender},#{image},#{job},#{entrydate},#{deptId},#{createTime},#{updateTime})")
